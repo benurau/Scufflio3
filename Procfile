@@ -1,1 +1,1 @@
-web: node .\socket-io-server\app.js
+web: node socket-io-server/app.js
