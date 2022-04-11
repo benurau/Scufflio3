@@ -1,0 +1,23 @@
+.box {
+    height: 400px;
+    width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    
+  
+    overflow-y: auto;
+  }
+  .box .inner {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  
+    align-items: flex-end;
+    flex-basis: 100%;
+    height: 100%;
+    align-content: flex-end;
+  
+
+    min-height: min-content;
+  }

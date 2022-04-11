@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.3",
+    "heroku": "^7.60.1",
+    "node": "^17.7.1",
+    "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1"
+  }
+}
