@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
+const front = require("../scufflio/public/index")
 
 
 
 router.get("/", (req, res) => {
-  res.sendFile()
+  res.render(front)
 });
 
 module.exports = router;
