@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 
-router.get("/", (req, res) => {
+router.get("/ih", (req, res) => {
   res.send({ response: "I am alive" }).status(200);
 });
 
