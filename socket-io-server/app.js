@@ -5,12 +5,11 @@ const http = require("http");
 const socketIo = require("socket.io");
 
 const port = process.env.PORT || 3001;
-const index = require("./routes/index");
+
 
 
 const app = express();
-app.use(index);
-
+app.use(express.static(path.resolve(__dirname, "./build")));
 const server = http.createServer(app);
 
 const io = socketIo(server, {
