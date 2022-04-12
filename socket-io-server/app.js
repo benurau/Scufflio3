@@ -9,6 +9,7 @@ const port = process.env.PORT || 3001;
 
 
 const app = express();
+const path = require("path");
 app.use(express.static(path.resolve(__dirname, "./build")));
 const server = http.createServer(app);
 
