@@ -5,7 +5,7 @@ const front = require("../scufflio/public/index")
 
 
 router.get("/", (req, res) => {
-  res.render(front)
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 module.exports = router;

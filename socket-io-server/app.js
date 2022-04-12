@@ -10,7 +10,7 @@ const index = require("./routes/index");
 
 const app = express();
 app.use(index);
-app.use(express.static('build'))
+app.use(express.static(path.join(__dirname, 'build')));
 const server = http.createServer(app);
 
 const io = socketIo(server, {
