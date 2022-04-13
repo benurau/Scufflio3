@@ -13,7 +13,11 @@ const path = require("path");
 app.use(express.static(path.resolve(__dirname, "./build")));
 const server = http.createServer(app);
 
-const io = socketIo(server);
+const io = socketIo(server, {
+  cors: {
+    origin: "http://localhost:3000"
+  }
+});
 
 
 
@@ -37,7 +41,7 @@ io.on("connection", (socket) => {
     clearInterval(interval);
   }
 
-  interval = setInterval(() => getApiAndEmit(socket), 6000);
+  interval = setInterval(() => getApiAndEmit(socket), 60000);
   socket.on("disconnect", () => {
     const p_user = user_Disconnect(socket.id);
     console.log("Client disconnected");

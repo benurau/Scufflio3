@@ -65,11 +65,19 @@ export const CanvasProvider = ({ children }) => {
           contextRef.current.lineTo(data.x, data.y);
           contextRef.current.stroke();
       });
-    } 
-   
-    
-    
-    
+    }         
+  };
+
+  const throttle = (callback, delay) => {
+    let previousCall = new Date().getTime();
+    return function() {
+      const time = new Date().getTime();
+
+      if ((time - previousCall) >= delay) {
+        previousCall = time;
+        callback.apply(null, arguments);
+      }
+    };
   };
 
   const clearCanvas = () => {
@@ -89,6 +97,7 @@ export const CanvasProvider = ({ children }) => {
         finishDrawing,
         clearCanvas,
         draw,
+        throttle
       }}
     >
       {children}

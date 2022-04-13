@@ -10,7 +10,8 @@ export function Canvas({}) {
     startDrawing,
     finishDrawing,
     draw,
-    clearCanvas
+    clearCanvas,
+    throttle
   } = useCanvas();
 
   useEffect(() => {
@@ -18,13 +19,16 @@ export function Canvas({}) {
     socket.on('turn', data => {
       clearCanvas()
     })
+    socket.on('sendcoords', data => {
+      draw()
+    })
   }, []);
 
   return (
     <canvas
       onMouseDown={startDrawing}
       onMouseUp={finishDrawing}
-      onMouseMove={draw}
+      onMouseMove={throttle(draw, 10)}
       ref={canvasRef}
     />
   );
