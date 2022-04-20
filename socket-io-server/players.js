@@ -22,6 +22,11 @@ function join_User(id, username) {
 
 console.log("user out", c_users);
 
+function start(){
+  if (c_users.length === 1){
+    return 1;
+  }
+}
 
 function get_Current_User(id) {
   return c_users.find((p_user) => p_user.id === id);
@@ -74,5 +79,6 @@ module.exports = {
   user_Disconnect,
   getRole,
   shuffleHost,
-  get_Name
+  get_Name,
+  start
 };

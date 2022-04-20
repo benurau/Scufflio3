@@ -10,7 +10,7 @@ export default class Chatbox extends Component {
     
       render() {
         return (
-          <div className="ChatBox">
+          <div  className="ChatBox">
             <ChatWindow/>
             <ChatForm />
           </div>

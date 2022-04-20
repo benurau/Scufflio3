@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .whiteboard {
+    height: 50%;
+    width: 50%;
+    position: relative;
+  }
+  
+  .colors {
+    position: relative;
+  }
+  
+  .color {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+  }
+  
+  .color.black { background-color: black; }
+  .color.red { background-color: red; }
+  .color.green { background-color: green; }
+  .color.blue { background-color: blue; }
+  .color.yellow { background-color: yellow; }
+
+  .writer{
+    float: right;
+    background-color: coral;
+  }

@@ -1,4 +1,4 @@
-const { get_Name,shuffleHost ,getRole,get_Current_User, user_Disconnect, join_User } = require("./players");
+const { get_Name,shuffleHost ,start,getRole,get_Current_User, user_Disconnect, join_User } = require("./players");
 const express = require("express");
 const {getWords,setAnswer,checkGuess} = require("./guesses")
 const http = require("http");
@@ -10,6 +10,7 @@ const port = process.env.PORT || 3001;
 
 const app = express();
 const path = require("path");
+const { get } = require("express/lib/response");
 app.use(express.static(path.resolve(__dirname, "./build")));
 const server = http.createServer(app);
 
@@ -22,26 +23,27 @@ const io = socketIo(server, {
 
 
 let interval;
-io.on("connection", (socket) => {
+io.on("connection",  (socket) => {
 
   
   console.log("connected")
-  
-
-  
-  
 
   
 
-  socket.on('data',function (data) {
-    socket.broadcast.emit('sendCoords', {x: data.x, y:data.y})
-  });
+  
+  socket.on('drawing', (data) => socket.broadcast.emit('drawing', data));
+  
+  
+
+  
+
+  
   
   if (interval) {
     clearInterval(interval);
   }
 
-  interval = setInterval(() => getApiAndEmit(socket), 60000);
+  interval = setInterval(() => getApiAndEmit(socket), 6000);
   socket.on("disconnect", () => {
     const p_user = user_Disconnect(socket.id);
     console.log("Client disconnected");
@@ -53,16 +55,21 @@ io.on("connection", (socket) => {
   })
 
   socket.on("joinLobby", ({ username }) => {
-
     const p_user = join_User(socket.id, username);
     console.log(socket.id, "=id");
     socket.join(p_user);
+
+    if (start() === 1){
+      socket.emit('turn', true)
+    }
   });
 
   socket.on('fromGuess',function (data){
     io.to(socket.id).emit("answer", checkGuess(data))
     io.emit('toGuess', {msg: data, usn:get_Name(socket.id)})
   });
+
+  
 
 });
 
@@ -73,13 +80,14 @@ const getApiAndEmit = socket => {
   var words = getWords()
   setAnswer(null)
   if (host != undefined){
-    io.to(host.off).emit('turn', 0);
     io.to(host.off).emit('words',{words:words, turn:false})
-    io.to(host.on).emit('turn', 1);
+
+    io.to(host.on).emit('turn', true);
     io.to(host.on).emit('words', {words:words,turn:true});
+    io.emit('writer', get_Name(host.on))
+
   } else {
-    io.emit('turn', 1)
-    io.emit('words', words);
+    io.emit('turn', true)
   }
 };
 

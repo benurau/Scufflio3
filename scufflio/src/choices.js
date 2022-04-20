@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import socket from "./socket";
+import "./choices.css"
 
 function Choices(){
     const [chosen,setChosen] = useState("")
@@ -29,7 +30,7 @@ function Choices(){
     
 
     return (
-        <div>
+        <div className="choices">
             {turn && <div>
             {show && <div>
             {allWords.map((word,i) => 
